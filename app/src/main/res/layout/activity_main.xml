@@ -34,4 +34,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.759" />
 
+    <Imageview
+    android:layout_width = "match_parent"
+    android:layout_height = "0dp"
+    android:layout_weight = "1"
+    android:id = "@+id/image_view"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_open"
+        android:text = "Open Camera"
+        android:layout_marginTop = "10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
