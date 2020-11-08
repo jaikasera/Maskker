@@ -17,40 +17,45 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imageview;
-    Button btOpen;
+    ImageView imageView;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageview = findViewById(R.id.image_view);
-        btOpen = findViewById(R.id.bt_open);
-
-        if(ContextCompat.checkSelfPermission( MainActivity.this, Manifest.permission.CAMERA) !=
-        PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[] {
-                    Manifest.permission.CAMERA
-            },
-                    100);
+        imageView = findViewById(R.id.imageview);
+        button = findViewById(R.id.button);
+        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{
+                Manifest.permission.CAMERA
+            }, 100);
         }
 
-        btOpen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 100);
-            }
-        });
-    }
+    button.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 100);
+        }
+    });
 
+    }
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bitmap captureImage = (Bitmap) data.getExtras().get("data");
-            imageview.setImageBitmap(captureImage);
+        if(requestCode == 100){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(bitmap);
         }
     }
+
+    // put in androidmanifest.xml <uses-permission android:name="android.permission.CAMERA"/>
+
+
 }
+
+
+        
+
